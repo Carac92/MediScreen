@@ -2,12 +2,11 @@ package com.mediscreen.patient.controller;
 
 import com.mediscreen.patient.model.Patient;
 import com.mediscreen.patient.service.PatientService;
-import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@Controller
+@RestController
 @RequestMapping("/patient")
 public class PatientController {
     private final PatientService patientService;
@@ -16,6 +15,7 @@ public class PatientController {
     public PatientController(PatientService patientService) {
         this.patientService = patientService;
     }
+    
     @GetMapping("/list")
     public List<Patient> listPatients() {
         return patientService.getAllPatients();
