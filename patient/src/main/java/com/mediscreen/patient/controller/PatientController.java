@@ -2,6 +2,7 @@ package com.mediscreen.patient.controller;
 
 import com.mediscreen.patient.model.Patient;
 import com.mediscreen.patient.service.PatientService;
+import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -29,7 +30,7 @@ public class PatientController {
         return patientService.getPatientByFirstNameAndLastName(firstName, lastName);
     }
     @PostMapping("/add")
-    public void addPatient(@RequestBody Patient patient) {
+    public void addPatient(@RequestBody @Valid Patient patient) {
         patientService.addPatient(patient);
     }
     @PostMapping("/delete/{id}")
@@ -37,7 +38,7 @@ public class PatientController {
         patientService.deletePatient(id);
     }
     @PostMapping("/update")
-    public void updatePatient(@RequestBody Patient patient) {
+    public void updatePatient(@RequestBody @Valid Patient patient) {
         patientService.updatePatient(patient);
     }
 }

@@ -2,6 +2,8 @@ package com.mediscreen.patient.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Past;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
@@ -10,11 +12,17 @@ import java.util.Date;
 public class Patient {
     @Id
     private long id;
+    @NotNull
     private String firstName;
+    @NotNull
     private String lastName;
+    @NotNull
+    @Past
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dob;
+    @NotNull
     private String phoneNumber;
+    @NotNull
     private char gender;
     private String address;
     public Patient() {
