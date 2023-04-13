@@ -15,30 +15,29 @@ public class PatientController {
     public PatientController(PatientService patientService) {
         this.patientService = patientService;
     }
-    
+
     @GetMapping("/list")
     public List<Patient> listPatients() {
         return patientService.getAllPatients();
     }
     @GetMapping("/{id}")
-    public Patient getPatientById(@PathVariable Long id) {
+    public Patient getPatientById(@PathVariable("id") Long id) {
         return patientService.getPatientById(id);
     }
-    @GetMapping("/firstName={firstName}&lastName={lastName}")
-    public Patient getPatientByFirstNameAndLastName(@PathVariable String firstName,
-                                                    @PathVariable String lastName) {
+    @GetMapping("/{firstName}/{lastName}")
+    public Patient getPatientByFirstNameAndLastName(@PathVariable(value = "firstName") String firstName,@PathVariable(value = "lastName") String lastName) {
         return patientService.getPatientByFirstNameAndLastName(firstName, lastName);
     }
-    @PutMapping("/add")
-    public void addPatient(@RequestParam Patient patient) {
+    @PostMapping("/add")
+    public void addPatient(@RequestBody Patient patient) {
         patientService.addPatient(patient);
     }
-    @PutMapping("/delete/{id}")
-    public void deletePatient(@PathVariable Long id) {
+    @PostMapping("/delete/{id}")
+    public void deletePatient(@PathVariable(value = "id") Long id) {
         patientService.deletePatient(id);
     }
-    @PutMapping("/update")
-    public void updatePatient(@RequestParam Patient patient) {
+    @PostMapping("/update")
+    public void updatePatient(@RequestBody Patient patient) {
         patientService.updatePatient(patient);
     }
 }

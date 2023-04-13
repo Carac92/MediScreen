@@ -2,7 +2,7 @@ package com.mediscreen.patient.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToOne;
+import org.springframework.format.annotation.DateTimeFormat;
 
 import java.util.Date;
 
@@ -12,16 +12,15 @@ public class Patient {
     private long id;
     private String firstName;
     private String lastName;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private Date dob;
-    private int phoneNumber;
-    private boolean gender;
-
-    @OneToOne(mappedBy = "patient")
-    private Address address;
+    private String phoneNumber;
+    private char gender;
+    private String address;
     public Patient() {
     }
 
-    public Patient(long id, String firstName, String lastName, Date dob, int phoneNumber, boolean gender, Address address) {
+    public Patient(long id, String firstName, String lastName, Date dob, String phoneNumber, char gender, String address) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -64,27 +63,27 @@ public class Patient {
         this.dob = dob;
     }
 
-    public Address getAddress() {
+    public String getAddress() {
         return address;
     }
 
-    public void setAddress(Address address) {
+    public void setAddress(String address) {
         this.address = address;
     }
 
-    public int getPhoneNumber() {
+    public String getPhoneNumber() {
         return phoneNumber;
     }
 
-    public void setPhoneNumber(int phoneNumber) {
+    public void setPhoneNumber(String phoneNumber) {
         this.phoneNumber = phoneNumber;
     }
 
-    public boolean isGender() {
+    public char isGender() {
         return gender;
     }
 
-    public void setGender(boolean gender) {
+    public void setGender(char gender) {
         this.gender = gender;
     }
 
