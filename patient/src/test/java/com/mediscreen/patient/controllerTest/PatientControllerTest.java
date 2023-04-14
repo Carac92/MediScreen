@@ -22,8 +22,7 @@ import java.util.List;
 import static org.hamcrest.Matchers.hasSize;
 import static org.mockito.BDDMockito.given;
 import static org.mockito.Mockito.*;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
+import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
@@ -98,7 +97,7 @@ public class PatientControllerTest {
         Long id = 1L;
         doNothing().when(patientService).deletePatient(id);
 
-        mockMvc.perform((RequestBuilder) post("/patient/delete/1"))
+        mockMvc.perform((RequestBuilder) delete("/patient/delete/1"))
                 .andExpect(status().isOk());
 
         verify(patientService, times(1)).deletePatient(id);
@@ -109,7 +108,7 @@ public class PatientControllerTest {
         Patient patient = new Patient(1L, "John", "Doe", new Date(1990-01-01), "12345", 'M', "test");
         doNothing().when(patientService).updatePatient(patient);
 
-        mockMvc.perform(post("/patient/update")
+        mockMvc.perform(put("/patient/update")
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(new ObjectMapper().writeValueAsString(patient)))
                 .andExpect(status().isOk());

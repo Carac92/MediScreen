@@ -30,7 +30,8 @@ public class PatientController {
     }
     @Operation(summary = "Get patient by first name and last name")
     @GetMapping("/{firstName}/{lastName}")
-    public Patient getPatientByFirstNameAndLastName(@PathVariable(value = "firstName") String firstName,@PathVariable(value = "lastName") String lastName) {
+    public Patient getPatientByFirstNameAndLastName(@PathVariable(value = "firstName") String firstName,
+                                                    @PathVariable(value = "lastName") String lastName) {
         return patientService.getPatientByFirstNameAndLastName(firstName, lastName);
     }
     @Operation(summary = "Add a patient")
@@ -39,12 +40,12 @@ public class PatientController {
         patientService.addPatient(patient);
     }
     @Operation(summary = "Delete a patient")
-    @PostMapping("/delete/{id}")
+    @DeleteMapping("/delete/{id}")
     public void deletePatient(@PathVariable(value = "id") Long id) {
         patientService.deletePatient(id);
     }
     @Operation(summary = "Update a patient")
-    @PostMapping("/update")
+    @PutMapping("/update")
     public void updatePatient(@RequestBody @Valid Patient patient) {
         patientService.updatePatient(patient);
     }
