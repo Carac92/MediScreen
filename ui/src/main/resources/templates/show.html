@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>PayMyBuddy</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+</head>
+<body>
+<div class = "container">
+    <h1>Profile</h1>
+    <form th:method="put" th:action="@{/updatePatient}" th:object="${patient}">
+        <div class="mb-3">
+            <input class="form-label" th:field="*{firstName}" type="text" name="first name" th:placeholder="${patient.getFirstName()}" required="">
+        </div>
+        <div class="mb-3">
+            <input class="form-label " th:field="*{lastName}" type="text" name="last name" th:placeholder="${patient.getLastName()}" required="">
+        </div>
+        <div class="mb-3">
+            <input class="form-label" th:field="*{phoneNumber}" type="text" name="phone number" th:placeholder="${patient.getPhoneNumber()}" required="">
+        </div>
+        <div class="mb-3">
+            <input class="form-label" th:field="*{gender}" type="text" name="gender" th:placeholder="${gender}" required="">
+        </div>
+        <div class="mb-3">
+            <input class="form-label" th:field="*{address}" type="text" name="address" th:placeholder="${patient.getAddress()}" required="">
+        </div>
+        <div class="mb-3">
+            <label>Birthdate</label>
+            <input class="date" th:field="*{dob}" type="date" name="dob" th:placeholder="${patient.getDob()}" required="">
+        </div>
+        <button type="submit" class="btn btn-primary">Update Profile</button>
+    </form>
+</div>
+</body>

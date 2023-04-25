@@ -68,7 +68,7 @@ public class PatientBean {
         this.phoneNumber = phoneNumber;
     }
 
-    public char isGender() {
+    public char getGender() {
         return gender;
     }
 

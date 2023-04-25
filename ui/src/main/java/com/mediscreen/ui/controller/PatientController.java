@@ -6,6 +6,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
@@ -23,20 +24,28 @@ public class PatientController {
     public String listPatients(Model model) {
         List<PatientBean> patients = patientProxy.getPatients();
         model.addAttribute("patients", patients);
-        return "patient/list";
+        return "list";
     }
     @GetMapping("/{id}")
     public String getPatientById(@PathVariable("id") Long id, Model model) {
         PatientBean patient = patientProxy.getPatientById(id);
         model.addAttribute("patient", patient);
-        return "patient/show";
+        //TODO: Regarder pourquoi le charactère n'est pas affiché correctement
+        String htmlGender = "&#x" + Integer.toHexString(String.valueOf(patient.getGender()).codePointAt(0)).toUpperCase() + ";";
+        model.addAttribute("gender", htmlGender);
+        return "show";
     }
     @GetMapping("/{firstName}/{lastName}")
     public String getPatientByFirstNameAndLastName(@PathVariable(value = "firstName") String firstName,
                                                    @PathVariable(value = "lastName") String lastName, Model model) {
         PatientBean patient = patientProxy.getPatientByFirstNameAndLastName(firstName, lastName);
         model.addAttribute("patient", patient);
-        return "patient/show";
+        return "show";
     }
-    
+    @PostMapping("/updatePatient")
+    public String updatePatient(PatientBean patient) {
+        patientProxy.updatePatient(patient);
+        return "redirect:/list";
+    }
+
 }

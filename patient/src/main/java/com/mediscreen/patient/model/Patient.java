@@ -87,7 +87,7 @@ public class Patient {
         this.phoneNumber = phoneNumber;
     }
 
-    public char isGender() {
+    public char getGender() {
         return gender;
     }
 
