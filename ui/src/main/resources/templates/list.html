@@ -2,7 +2,7 @@
 <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>PayMyBuddy</title>
+    <title>Mediscreen</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
           integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
     <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
@@ -19,6 +19,7 @@
                 <th>Address</th>
                 <th>Phone Number</th>
                 <th>Gender</th>
+                <th>Delete</th>
             </tr>
             <tr th:each="patient:${patients}" >
                 <th th:href="@{${patient.getId()}}" th:text="${patient.getLastName()}"></th>
@@ -27,6 +28,12 @@
                 <th th:text="${patient.getAddress()}"></th>
                 <th th:text="${patient.getPhoneNumber()}"></th>
                 <th th:text="${patient.isGender()}"></th>
+                <th>
+                    <form th:action="@{contact/deletePatient}" th:method="delete">
+                        <input type="hidden" name="patient" th:value="${patient.getId()}" />
+                        <input type="submit" value="Delete" class="btn btn-danger" />
+                    </form>
+                </th>
             </tr>
         </table>
     </div>

@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Mediscreen</title>
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+    <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+</head>
+<body>
+<div class = "container">
+    <h1>Add Patient</h1>
+    <form method="post" th:action="@{/addPatient}" th:object="${patient}">
+        <div class="mb-3">
+            <input class="form-label" th:field="*{firstName}" type="text" name="first name" placeholder="First Name" required="">
+        </div>
+        <div class="mb-3">
+            <input class="form-label " th:field="*{lastName}" type="text" name="last name" placeholder="Last Name" required="">
+        </div>
+        <div class="mb-3">
+            <input class="form-label" th:field="*{address}" type="text" name="address" placeholder="Address" required="">
+        </div>
+        <div class="mb-3">
+            <input class="form-label" th:field="*{phoneNumber}" type="text" name="phoneNumber" placeholder="Phone Number" required="">
+        </div>
+        <div class="mb-3">
+            <input class="form-label" th:field="*{gender}" type="text" name="gender" placeholder="Gender" required="">
+        </div>
+        <div class="mb-3">
+            <label>Birthdate</label>
+            <input class="date" th:field="*{dob}" type="date" name="Birthdate" placeholder="Birthdate" required="">
+        </div>
+        <button type="submit" class="btn btn-primary">Add Patient</button>
+    </form>
+</div>
+</body>

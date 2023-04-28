@@ -47,5 +47,20 @@ public class PatientController {
         patientProxy.updatePatient(patient);
         return "redirect:/list";
     }
+    @PostMapping("/addPatient")
+    public String addPatient(PatientBean patient) {
+        patientProxy.addPatient(patient);
+        return "redirect:/list";
+    }
+    @GetMapping("/add")
+    public String addPatientForm(Model model) {
+        model.addAttribute("patient", new PatientBean());
+        return "addPatientForm";
+    }
+    @PostMapping("/deletePatient")
+    public String deletePatient(Long patient) {
+        patientProxy.deletePatient(patient);
+        return "redirect:/list";
+    }
 
 }
