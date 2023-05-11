@@ -3,7 +3,7 @@ package com.mediscreen.note.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
 @Document(collection = "notes")
 public class Note {
@@ -11,7 +11,7 @@ public class Note {
     @Id
     private String id;
     private String patId;
-    private Date date;
+    private LocalDateTime date;
     private String annotation;
 
     public Note() {
@@ -34,7 +34,7 @@ public class Note {
     public String getAnnotation() {
         return annotation;
     }
-    public Date getDate() {
+    public LocalDateTime getDate() {
         return date;
     }
 
@@ -49,7 +49,7 @@ public class Note {
     public void setAnnotation(String annotation) {
         this.annotation = annotation;
     }
-    public void setDate(Date date) {
+    public void setDate(LocalDateTime date) {
         this.date = date;
     }
 }

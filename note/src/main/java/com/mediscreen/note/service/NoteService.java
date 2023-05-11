@@ -4,6 +4,7 @@ import com.mediscreen.note.model.Note;
 import com.mediscreen.note.repository.NoteRepository;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -21,6 +22,7 @@ public class NoteService {
         noteRepository.deleteById(id);
     }
     public void add(Note note) {
+        note.setDate(LocalDateTime.now());
         noteRepository.save(note);
     }
     public void update(Note note) {
@@ -31,5 +33,8 @@ public class NoteService {
     }
     public List<Note> findAll() {
         return noteRepository.findAll();
+    }
+    public List<Note> findAllNotesByPatId(String patId) {
+        return noteRepository.findByPatId(patId);
     }
 }
