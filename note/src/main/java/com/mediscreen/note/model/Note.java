@@ -3,12 +3,15 @@ package com.mediscreen.note.model;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import java.util.Date;
+
 @Document(collection = "notes")
 public class Note {
 
     @Id
     private String id;
-    private String patientId;
+    private String patId;
+    private Date date;
     private String annotation;
 
     public Note() {
@@ -16,7 +19,7 @@ public class Note {
 
     public Note(String id, String patientId, String annotation) {
         this.id = id;
-        this.patientId = patientId;
+        this.patId = patientId;
         this.annotation = annotation;
     }
 
@@ -24,23 +27,29 @@ public class Note {
         return id;
     }
 
-    public String getPatientId() {
-        return patientId;
+    public String getPatId() {
+        return patId;
     }
 
     public String getAnnotation() {
         return annotation;
+    }
+    public Date getDate() {
+        return date;
     }
 
     public void setId(String id) {
         this.id = id;
     }
 
-    public void setPatientId(String patientId) {
-        this.patientId = patientId;
+    public void setPatId(String patId) {
+        this.patId = patId;
     }
 
     public void setAnnotation(String annotation) {
         this.annotation = annotation;
+    }
+    public void setDate(Date date) {
+        this.date = date;
     }
 }
