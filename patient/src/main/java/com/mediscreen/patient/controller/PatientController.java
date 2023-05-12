@@ -45,8 +45,8 @@ public class PatientController {
         patientService.deletePatient(id);
     }
     @Operation(summary = "Update a patient")
-    @PutMapping("/update")
-    public void updatePatient(@RequestBody @Valid Patient patient) {
+    @PutMapping("/update/{id}")
+    public void updatePatient(@PathVariable(value = "id") Long id,@RequestBody @Valid Patient patient) {
         patientService.updatePatient(patient);
     }
 }

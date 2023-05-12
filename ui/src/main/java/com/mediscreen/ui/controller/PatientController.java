@@ -1,13 +1,12 @@
 package com.mediscreen.ui.controller;
 
+import com.mediscreen.ui.beans.NoteBean;
 import com.mediscreen.ui.beans.PatientBean;
+import com.mediscreen.ui.proxies.NoteProxy;
 import com.mediscreen.ui.proxies.PatientProxy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -15,11 +14,13 @@ import java.util.List;
 @RequestMapping("/patient")
 public class PatientController {
     private final PatientProxy patientProxy;
+    private final NoteProxy noteProxy;
 
-    public PatientController(PatientProxy patientProxy) {
+    public PatientController(PatientProxy patientProxy, NoteProxy noteProxy) {
         this.patientProxy = patientProxy;
+        this.noteProxy = noteProxy;
     }
-
+// Patient endpoints
     @GetMapping("/list")
     public String listPatients(Model model) {
         List<PatientBean> patients = patientProxy.getPatients();
@@ -30,21 +31,22 @@ public class PatientController {
     public String getPatientById(@PathVariable("id") Long id, Model model) {
         PatientBean patient = patientProxy.getPatientById(id);
         model.addAttribute("patient", patient);
+        model.addAttribute("notes", noteProxy.getNotesByPatId(id.toString()));
         //TODO: Regarder pourquoi le charactère n'est pas affiché correctement
         String htmlGender = "&#x" + Integer.toHexString(String.valueOf(patient.getGender()).codePointAt(0)).toUpperCase() + ";";
         model.addAttribute("gender", htmlGender);
-        return "show";
+        return "patient";
     }
     @GetMapping("/{firstName}/{lastName}")
     public String getPatientByFirstNameAndLastName(@PathVariable(value = "firstName") String firstName,
                                                    @PathVariable(value = "lastName") String lastName, Model model) {
         PatientBean patient = patientProxy.getPatientByFirstNameAndLastName(firstName, lastName);
         model.addAttribute("patient", patient);
-        return "show";
+        return "patient";
     }
     @PostMapping("/updatePatient")
     public String updatePatient(PatientBean patient) {
-        patientProxy.updatePatient(patient);
+        patientProxy.updatePatient(patient.getId(),patient);
         return "redirect:/list";
     }
     @PostMapping("/addPatient")
@@ -58,9 +60,21 @@ public class PatientController {
         return "addPatientForm";
     }
     @PostMapping("/deletePatient")
-    public String deletePatient(Long patient) {
-        patientProxy.deletePatient(patient);
+    public String deletePatient(@RequestParam(value = "patientId") Long patientId) {
+        patientProxy.deletePatient(patientId);
         return "redirect:/list";
     }
+    // Note endpoints
 
+    @PostMapping("/{id}/addNote")
+    public String addNoteForm(@PathVariable Long id, Model model){
+        model.addAttribute("note", new NoteBean());
+        model.addAttribute("patId", id);
+        return "addNoteForm";
+    }
+    @PostMapping("/updateNote")
+    public String updateNoteById(NoteBean note){
+        noteProxy.updateNote(note.getId(), note);
+        return "redirect:/${note.patId}";
+    }
 }
