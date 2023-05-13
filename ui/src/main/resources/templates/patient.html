@@ -32,5 +32,29 @@
         </div>
         <button type="submit" class="btn btn-primary">Update Profile</button>
     </form>
-</div>
+    </div>
+    <div th:if="${notes!=null and !notes.empty}">
+    <h1>Medical notes</h1>
+    <table class="table table-striped table-hover">
+        <tr class="table-success" >
+            <th>Date</th>
+            <th>Notes</th>
+            <th>Modify</th>
+            <th>Delete</th>
+        </tr>
+        <tr th:each="note:${notes}" >
+            <th th:text="${note.getDate()}"></th>
+            <th th:text="${note.getAnnotation()}"></th>
+            <th class="btn btn-primary" th:attr="onclick='window.location.href=\'/note/'+ ${note.getId()} +'\''">Edit</th>
+            <th>
+                <form th:action="@{/note/deleteNote}" th:method="delete">
+                    <input type="hidden" name="noteId" th:value="${note.getId()}" />
+                    <input type="hidden" name="patId" th:value="${patient.getId()}" />
+                    <input type="submit" value="Delete" class="btn btn-danger" />
+                </form>
+            </th>
+        </tr>
+    </table>
+    </div>
+<a th:href="@{/note/{id}/addNote(id=${patient.getId()})}"> Add a note</a>
 </body>

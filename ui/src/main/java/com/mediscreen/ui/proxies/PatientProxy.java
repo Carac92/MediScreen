@@ -19,7 +19,7 @@ public interface PatientProxy {
     void addPatient(PatientBean patient);
     @DeleteMapping(value = "/delete/{id}")
     void deletePatient(@PathVariable(value = "id") Long id);
-    @PutMapping(value = "/update")
-    void updatePatient(PatientBean patient);
+    @PutMapping(value = "/update/{id}")
+    void updatePatient(@PathVariable Long id, PatientBean patient);
 
 }

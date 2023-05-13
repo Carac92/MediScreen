@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+  <meta charset="UTF-8">
+  <title>Mediscreen</title>
+  <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-/Y6pD6FV/Vv2HJnA6t+vslU6fwYXjCFtcEpHbNJ0lyAFsXTsjBbfaDjzALeQsN6M" crossorigin="anonymous">
+  <link href="https://getbootstrap.com/docs/4.0/examples/signin/signin.css" rel="stylesheet" crossorigin="anonymous">
+  <style>
+    .hidden {
+      display: none;
+    }
+  </style>
+</head>
+<body>
+<div class = "container">
+  <h1>Note</h1>
+  <form th:method="put" th:action="@{/note/updateNote}" th:object="${note}">
+    <div class="mb-3">
+        <label class="hidden">
+            <input class="hidden" th:field="*{id}" type="text" name="id" th:placeholder="${note.getId()}" required="">
+      </label>
+      <label class="hidden">
+        <input class="hidden" th:field="*{patId}" type="text" name="patId" th:placeholder="${note.getPatId()}" required="">
+      </label>
+        <label class="hidden">
+            <input class="hidden" th:field="*{date}" type="text" name="date" th:placeholder="${note.getDate()}" required="">
+        </label>
+      <label>
+        <input class="form-label" th:field="*{annotation}" type="text" name="annotation" th:placeholder="${note.getAnnotation()}" required="">
+      </label>
+    </div>
+    <button type="submit" class="btn btn-primary">Edit</button>
+  </form>
+</div>
+</body>
+</html>
