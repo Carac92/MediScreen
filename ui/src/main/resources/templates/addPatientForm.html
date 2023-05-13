@@ -10,7 +10,7 @@
 <body>
 <div class = "container">
     <h1>Add Patient</h1>
-    <form method="post" th:action="@{/addPatient}" th:object="${patient}">
+    <form method="post" th:action="@{/patient/validAddPatient}" th:object="${patient}">
         <div class="mb-3">
             <input class="form-label" th:field="*{firstName}" type="text" name="first name" placeholder="First Name" required="">
         </div>

@@ -20,13 +20,25 @@ public class NoteController {
         return "note";
     }
     @PostMapping("/addNote")
-    public String addNote(NoteBean note){
+    public String addNote(@ModelAttribute NoteBean note){
         noteProxy.addNote(note);
-        return "redirect:patient/${note.patId}";
+        return "redirect:/patient/"+note.getPatId();
+    }
+    @GetMapping("/{id}/addNote")
+    public String addNoteForm(@PathVariable(value = "id") Long patId, Model model){
+        NoteBean note = new NoteBean();
+        note.setPatId(patId.toString());
+        model.addAttribute("note", note);
+        return "addNoteForm";
     }
     @PostMapping("/deleteNote")
-    public String deleteNoteById(@RequestParam(value = "noteId") String noteId){
+    public String deleteNoteById(@RequestParam(value = "noteId") String noteId, @RequestParam(value = "patId") String patId){
         noteProxy.deleteNoteById(noteId);
-        return "redirect:patient/${note.patId)}";
+        return "redirect:/patient/" + patId;
+    }
+    @PostMapping("/updateNote")
+    public String updateNoteById(@ModelAttribute NoteBean note){
+        noteProxy.updateNote(note);
+        return "redirect:/patient/"+note.getPatId();
     }
 }

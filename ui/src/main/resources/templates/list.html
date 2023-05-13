@@ -9,7 +9,7 @@
 </head>
 <body>
 <div class="container">
-    <h2>Bills</h2>
+    <h2>Patients</h2>
     <div th:if="${patients!=null and !patients.empty}">
         <table class="table table-striped table-hover">
             <tr class="table-success" >
@@ -22,20 +22,21 @@
                 <th>Delete</th>
             </tr>
             <tr th:each="patient:${patients}" >
-                <th th:href="@{patient/${patient.getId()}}" th:text="${patient.getLastName()}"></th>
+                <th th:onclick="'window.location.href=\'/patient/'+ ${patient.getId()} +'\''"  th:text="${patient.getLastName()}"></th>
                 <th th:text="${patient.getFirstName()}"></th>
                 <th th:text="${patient.getDob()}"></th>
                 <th th:text="${patient.getAddress()}"></th>
                 <th th:text="${patient.getPhoneNumber()}"></th>
-                <th th:text="${patient.isGender()}"></th>
+                <th th:text="${patient.getGender()}"></th>
                 <th>
-                    <form th:action="@{patient/deletePatient}" th:method="delete">
-                        <input type="hidden" name="patient" th:value="${patient.getId()}" />
+                    <form th:action="@{/patient/deletePatient}" th:method="delete">
+                        <input type="hidden" id="patientId" name="patientId" th:value="${patient.getId()}" />
                         <input type="submit" value="Delete" class="btn btn-danger" />
                     </form>
                 </th>
             </tr>
         </table>
     </div>
+    <a th:href="@{/patient/addPatient}">Add Patient</a>
 </div>
 </body>

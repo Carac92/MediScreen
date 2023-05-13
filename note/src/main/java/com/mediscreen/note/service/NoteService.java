@@ -6,6 +6,7 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class NoteService {
@@ -28,8 +29,9 @@ public class NoteService {
     public void update(Note note) {
         noteRepository.save(note);
     }
-    public Note findById(String id) {
-        return noteRepository.findById(id).orElse(null);
+    public Note findById(String id){
+        Optional<Note> note = noteRepository.findById(id);
+        return note.orElseGet(Note::new);
     }
     public List<Note> findAll() {
         return noteRepository.findAll();

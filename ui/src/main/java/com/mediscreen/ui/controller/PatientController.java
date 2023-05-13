@@ -1,6 +1,5 @@
 package com.mediscreen.ui.controller;
 
-import com.mediscreen.ui.beans.NoteBean;
 import com.mediscreen.ui.beans.PatientBean;
 import com.mediscreen.ui.proxies.NoteProxy;
 import com.mediscreen.ui.proxies.PatientProxy;
@@ -49,12 +48,12 @@ public class PatientController {
         patientProxy.updatePatient(patient.getId(),patient);
         return "redirect:/list";
     }
-    @PostMapping("/addPatient")
+    @PostMapping("/validAddPatient")
     public String addPatient(PatientBean patient) {
         patientProxy.addPatient(patient);
-        return "redirect:/list";
+        return "redirect:/patient/list";
     }
-    @GetMapping("/add")
+    @GetMapping("/addPatient")
     public String addPatientForm(Model model) {
         model.addAttribute("patient", new PatientBean());
         return "addPatientForm";
@@ -62,19 +61,6 @@ public class PatientController {
     @PostMapping("/deletePatient")
     public String deletePatient(@RequestParam(value = "patientId") Long patientId) {
         patientProxy.deletePatient(patientId);
-        return "redirect:/list";
-    }
-    // Note endpoints
-
-    @PostMapping("/{id}/addNote")
-    public String addNoteForm(@PathVariable Long id, Model model){
-        model.addAttribute("note", new NoteBean());
-        model.addAttribute("patId", id);
-        return "addNoteForm";
-    }
-    @PostMapping("/updateNote")
-    public String updateNoteById(NoteBean note){
-        noteProxy.updateNote(note.getId(), note);
-        return "redirect:/${note.patId}";
+        return "redirect:/patient/list";
     }
 }

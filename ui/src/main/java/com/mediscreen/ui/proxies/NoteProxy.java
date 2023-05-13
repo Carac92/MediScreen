@@ -11,13 +11,13 @@ public interface NoteProxy {
     @GetMapping(value = "/list")
     List<NoteBean> getNotes();
     @GetMapping(value = "/list/{patId}")
-    List<NoteBean> getNotesByPatId(String patId);
+    List<NoteBean> getNotesByPatId(@PathVariable String patId);
     @GetMapping(value = "/{id}")
     NoteBean getNoteById(@PathVariable String id);
     @PostMapping(value = "/add")
     void addNote(NoteBean note);
-    @PutMapping(value = "/update/{id}")
-    void updateNote(@PathVariable("id") String id, NoteBean note);
+    @PutMapping(value = "/update")
+    void updateNote(NoteBean note);
 
     @DeleteMapping(value = "/delete/{id}")
     void deleteNoteById(@PathVariable String id);
