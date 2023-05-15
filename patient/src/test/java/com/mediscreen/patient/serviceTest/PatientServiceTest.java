@@ -9,8 +9,8 @@ import org.junit.runner.RunWith;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
-import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -27,7 +27,7 @@ public class PatientServiceTest {
 
     @Test
     public void testGetPatientById() {
-        Patient patient = new Patient(1L, "John", "Doe", new Date(), "12345", 'M', "test");
+        Patient patient = new Patient(1L, "John", "Doe", LocalDate.of(1,1,1), "12345", 'M', "test");
         when(patientRepository.findById(1L)).thenReturn(Optional.of(patient));
 
         Patient result = patientService.getPatientById(1L);
@@ -38,7 +38,7 @@ public class PatientServiceTest {
 
     @Test
     public void testGetPatientByFirstNameAndLastName() {
-        Patient patient = new Patient(1L, "John", "Doe", new Date(), "12345", 'M', "test");
+        Patient patient = new Patient(1L, "John", "Doe", LocalDate.of(1,1,1), "12345", 'M', "test");
         when(patientRepository.findPatientByFirstNameAndLastName("John", "Doe")).thenReturn(patient);
 
         Patient result = patientService.getPatientByFirstNameAndLastName("John", "Doe");
@@ -50,8 +50,8 @@ public class PatientServiceTest {
     @Test
     public void testGetAllPatients() {
         List<Patient> patients = new ArrayList<>();
-        patients.add(new Patient(1L, "John", "Doe", new Date(), "12345", 'M', "test"));
-        patients.add(new Patient(2L, "Jane", "Doe", new Date(), "12345", 'F', "test"));
+        patients.add(new Patient(1L, "John", "Doe", LocalDate.of(1,1,1), "12345", 'M', "test"));
+        patients.add(new Patient(2L, "Jane", "Doe", LocalDate.of(1,1,1), "12345", 'F', "test"));
         when(patientRepository.findAll()).thenReturn(patients);
 
         List<Patient> result = patientService.getAllPatients();
@@ -62,7 +62,7 @@ public class PatientServiceTest {
 
     @Test
     public void testAddPatient() {
-        Patient patient = new Patient(1L, "John", "Doe", new Date(), "12345", 'M', "test");
+        Patient patient = new Patient(1L, "John", "Doe", LocalDate.of(1,1,1), "12345", 'M', "test");
 
         patientService.addPatient(patient);
 
@@ -78,7 +78,7 @@ public class PatientServiceTest {
 
     @Test
     public void testUpdatePatient() {
-        Patient patient = new Patient(1L, "John", "Doe", new Date(), "12345", 'M', "test");
+        Patient patient = new Patient(1L, "John", "Doe", LocalDate.of(1,1,1), "12345", 'M', "test");
 
         patientService.updatePatient(patient);
 

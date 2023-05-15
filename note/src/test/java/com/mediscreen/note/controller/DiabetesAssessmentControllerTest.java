@@ -28,7 +28,7 @@ public class DiabetesAssessmentControllerTest {
     public void getAssessment_shouldReturnAssessment() throws Exception {
         given(diabetesAssessmentService.getAssessment("1")).willReturn(Assessment.IN_DANGER);
 
-        mockMvc.perform(get("/diabetes/1"))
+        mockMvc.perform(get("/assess/diabetes/1"))
                 .andExpect(status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$").value("In Danger"));
     }

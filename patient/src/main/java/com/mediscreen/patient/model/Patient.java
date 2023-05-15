@@ -4,9 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
-import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 @Entity
 public class Patient {
@@ -18,8 +17,7 @@ public class Patient {
     private String lastName;
     @NotNull
     @Past
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dob;
+    private LocalDate dob;
     @NotNull
     private String phoneNumber;
     @NotNull
@@ -28,7 +26,7 @@ public class Patient {
     public Patient() {
     }
 
-    public Patient(long id, String firstName, String lastName, Date dob, String phoneNumber, char gender, String address) {
+    public Patient(long id, String firstName, String lastName, LocalDate dob, String phoneNumber, char gender, String address) {
         this.id = id;
         this.firstName = firstName;
         this.lastName = lastName;
@@ -63,11 +61,11 @@ public class Patient {
         this.lastName = lastName;
     }
 
-    public Date getDob() {
+    public LocalDate getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(LocalDate dob) {
         this.dob = dob;
     }
 

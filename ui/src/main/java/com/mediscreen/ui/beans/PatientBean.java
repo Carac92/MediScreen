@@ -2,7 +2,7 @@ package com.mediscreen.ui.beans;
 
 import org.springframework.format.annotation.DateTimeFormat;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 public class PatientBean {
 
@@ -13,7 +13,7 @@ public class PatientBean {
     private String lastName;
 
     @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date dob;
+    private LocalDate dob;
 
     private String phoneNumber;
 
@@ -44,11 +44,11 @@ public class PatientBean {
         this.lastName = lastName;
     }
 
-    public Date getDob() {
+    public LocalDate getDob() {
         return dob;
     }
 
-    public void setDob(Date dob) {
+    public void setDob(LocalDate dob) {
         this.dob = dob;
     }
 
