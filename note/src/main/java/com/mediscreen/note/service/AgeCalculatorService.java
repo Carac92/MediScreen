@@ -7,11 +7,11 @@ import org.springframework.stereotype.Service;
 import java.time.Period;
 
 @Service
-public class AgeCalculator {
+public class AgeCalculatorService {
 
     private final PatientProxy patientProxy;
 
-    public AgeCalculator(PatientProxy patientProxy) {
+    public AgeCalculatorService(PatientProxy patientProxy) {
         this.patientProxy = patientProxy;
     }
     public int getAge(Long id) {

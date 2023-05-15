@@ -18,7 +18,7 @@ public class TriggersCalculatorServiceTest {
     @Mock
     private NoteRepository noteRepository;
     @InjectMocks
-    private TriggersCalculator triggersCalculator;
+    private TriggersCalculatorService triggersCalculatorService;
 
     @Test
     public void getTriggersCount() {
@@ -29,7 +29,7 @@ public class TriggersCalculatorServiceTest {
         // WHEN
         when(noteRepository.findByPatId("1")).thenReturn(notes);
         // THEN
-        int result = triggersCalculator.getTriggersCount("1");
+        int result = triggersCalculatorService.getTriggersCount("1");
         assertEquals(3, result);
     }
 

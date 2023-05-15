@@ -1,0 +1,79 @@
+version: '3.8'
+services:
+  mysql:
+    image: mysql
+    restart: always
+    environment:
+      MYSQL_ROOT_USERNAME: root
+      MYSQL_ROOT_PASSWORD: password
+    ports:
+      - "3306:3306"
+    volumes:
+      - .script.sql:/docker-entrypoint-initdb.d/script.sql
+
+    container_name: mysql
+  mongodb:
+    image: mongo
+    restart: always
+    ports:
+      - "27017:27017"
+    volumes:
+        - ./init.js:/docker-entrypoint-initdb.d/init-mongo.js
+    container_name: mongodb
+
+  mediscreen:
+    build: ./mediscreen
+    restart: always
+    ports:
+      - "8080:8080"
+    environment:
+      - CONFIG_SERVER_URL=config-server:9101
+      - PATIENTAPI_URL=patientAPI:8081
+      - NOTEAPI_URL=noteAPI:8082
+    depends_on:
+      - config-server
+      - note_api
+      - patient_api
+    container_name: mediscreen
+
+  config-server:
+    build: ./config-server
+    restart: always
+    ports:
+      - "9101:9101"
+    container_name: config-server
+
+  patient_api:
+    build: ./patient
+    restart: always
+    ports:
+      - "8081:8081"
+    environment:
+      - MYSQL_HOST=mysql
+      - MYSQL_PORT=3306
+      - MYSQL_DATABASE=patientdb
+      - DB_USER=root
+      - DB_PW=password
+      - CONFIG_SERVER_URL=config-server:9101
+    depends_on:
+      - mysql
+      - config-server
+    container_name: patientAPI
+
+  note_api:
+    build: ./note
+    restart: always
+    ports:
+      - "8082:8082"
+    environment:
+      - MONGODB_HOST=mongodb
+      - MONGODB_PORT=27017
+      - MONGODB_USERNAME=root
+      - MONGODB_PASSWORD=password
+      - MONGODB_DATABASE=note
+      - CONFIG_SERVER_URL=config-server:9101
+    depends_on:
+      - mongodb
+      - config-server
+      - patient_api
+    container_name: noteAPI

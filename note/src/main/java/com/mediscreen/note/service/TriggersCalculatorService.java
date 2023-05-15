@@ -9,10 +9,10 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Service
-public class TriggersCalculator {
+public class TriggersCalculatorService {
     private final NoteRepository noteRepository;
 
-    public TriggersCalculator(NoteRepository noteRepository) {
+    public TriggersCalculatorService(NoteRepository noteRepository) {
         this.noteRepository = noteRepository;
     }
     public int getTriggersCount(String patId) {

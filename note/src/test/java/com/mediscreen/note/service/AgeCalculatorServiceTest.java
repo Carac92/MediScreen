@@ -17,7 +17,7 @@ public class AgeCalculatorServiceTest {
     @Mock
     private PatientProxy patientProxy;
     @InjectMocks
-    private AgeCalculator ageCalculator;
+    private AgeCalculatorService ageCalculatorService;
 
     @Test
     public void testGetAge() {
@@ -28,7 +28,7 @@ public class AgeCalculatorServiceTest {
         // WHEN
         when(patientProxy.getPatientById(1L)).thenReturn(patient);
         // THEN
-        int age = ageCalculator.getAge(1L);
+        int age = ageCalculatorService.getAge(1L);
         assertEquals(23, age);
     }
 }

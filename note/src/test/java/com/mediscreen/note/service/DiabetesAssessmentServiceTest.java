@@ -16,9 +16,9 @@ public class DiabetesAssessmentServiceTest {
     @Mock
     private PatientProxy patientProxy;
     @Mock
-    private TriggersCalculator triggersCalculator;
+    private TriggersCalculatorService triggersCalculatorService;
     @Mock
-    private AgeCalculator ageCalculator;
+    private AgeCalculatorService ageCalculatorService;
     @InjectMocks
     private DiabetesAssessmentService diabetesAssessmentService;
 
@@ -29,9 +29,9 @@ public class DiabetesAssessmentServiceTest {
         patientBean.setGender('M');
         patientBean.setId(1L);
         //WHEN
-        when(ageCalculator.getAge(1L)).thenReturn(20);
+        when(ageCalculatorService.getAge(1L)).thenReturn(20);
         when(patientProxy.getPatientById(1L)).thenReturn(patientBean);
-        when(triggersCalculator.getTriggersCount("1")).thenReturn(2);
+        when(triggersCalculatorService.getTriggersCount("1")).thenReturn(2);
         //THEN
         Assessment result = diabetesAssessmentService.getAssessment("1");
         assertEquals(result.getAssessment(),Assessment.NONE.getAssessment());
@@ -43,9 +43,9 @@ public class DiabetesAssessmentServiceTest {
         patientBean.setGender('M');
         patientBean.setId(1L);
         //WHEN
-        when(ageCalculator.getAge(1L)).thenReturn(31);
+        when(ageCalculatorService.getAge(1L)).thenReturn(31);
         when(patientProxy.getPatientById(1L)).thenReturn(patientBean);
-        when(triggersCalculator.getTriggersCount("1")).thenReturn(2);
+        when(triggersCalculatorService.getTriggersCount("1")).thenReturn(2);
         //THEN
         Assessment result = diabetesAssessmentService.getAssessment("1");
         assertEquals(result.getAssessment(),Assessment.BORDERLINE.getAssessment());
@@ -58,9 +58,9 @@ public class DiabetesAssessmentServiceTest {
         patientBean.setGender('M');
         patientBean.setId(1L);
         //WHEN
-        when(ageCalculator.getAge(1L)).thenReturn(20);
+        when(ageCalculatorService.getAge(1L)).thenReturn(20);
         when(patientProxy.getPatientById(1L)).thenReturn(patientBean);
-        when(triggersCalculator.getTriggersCount("1")).thenReturn(4);
+        when(triggersCalculatorService.getTriggersCount("1")).thenReturn(4);
         //THEN
         Assessment result = diabetesAssessmentService.getAssessment("1");
         assertEquals(result.getAssessment(),Assessment.IN_DANGER.getAssessment());
@@ -72,9 +72,9 @@ public class DiabetesAssessmentServiceTest {
         patientBean.setGender('F');
         patientBean.setId(1L);
         //WHEN
-        when(ageCalculator.getAge(1L)).thenReturn(20);
+        when(ageCalculatorService.getAge(1L)).thenReturn(20);
         when(patientProxy.getPatientById(1L)).thenReturn(patientBean);
-        when(triggersCalculator.getTriggersCount("1")).thenReturn(5);
+        when(triggersCalculatorService.getTriggersCount("1")).thenReturn(5);
         //THEN
         Assessment result = diabetesAssessmentService.getAssessment("1");
         assertEquals(result.getAssessment(),Assessment.IN_DANGER.getAssessment());
@@ -86,9 +86,9 @@ public class DiabetesAssessmentServiceTest {
         patientBean.setGender('M');
         patientBean.setId(1L);
         //WHEN
-        when(ageCalculator.getAge(1L)).thenReturn(31);
+        when(ageCalculatorService.getAge(1L)).thenReturn(31);
         when(patientProxy.getPatientById(1L)).thenReturn(patientBean);
-        when(triggersCalculator.getTriggersCount("1")).thenReturn(7);
+        when(triggersCalculatorService.getTriggersCount("1")).thenReturn(7);
         //THEN
         Assessment result = diabetesAssessmentService.getAssessment("1");
         assertEquals(result.getAssessment(),Assessment.IN_DANGER.getAssessment());
@@ -101,9 +101,9 @@ public class DiabetesAssessmentServiceTest {
         patientBean.setGender('F');
         patientBean.setId(1L);
         //WHEN
-        when(ageCalculator.getAge(1L)).thenReturn(20);
+        when(ageCalculatorService.getAge(1L)).thenReturn(20);
         when(patientProxy.getPatientById(1L)).thenReturn(patientBean);
-        when(triggersCalculator.getTriggersCount("1")).thenReturn(8);
+        when(triggersCalculatorService.getTriggersCount("1")).thenReturn(8);
         //THEN
         Assessment result = diabetesAssessmentService.getAssessment("1");
         assertEquals(result.getAssessment(),Assessment.EARLY_ONSET.getAssessment());
@@ -115,9 +115,9 @@ public class DiabetesAssessmentServiceTest {
         patientBean.setGender('M');
         patientBean.setId(1L);
         //WHEN
-        when(ageCalculator.getAge(1L)).thenReturn(20);
+        when(ageCalculatorService.getAge(1L)).thenReturn(20);
         when(patientProxy.getPatientById(1L)).thenReturn(patientBean);
-        when(triggersCalculator.getTriggersCount("1")).thenReturn(6);
+        when(triggersCalculatorService.getTriggersCount("1")).thenReturn(6);
         //THEN
         Assessment result = diabetesAssessmentService.getAssessment("1");
         assertEquals(result.getAssessment(),Assessment.EARLY_ONSET.getAssessment());
@@ -130,9 +130,9 @@ public class DiabetesAssessmentServiceTest {
         patientBean.setGender('M');
         patientBean.setId(1L);
         //WHEN
-        when(ageCalculator.getAge(1L)).thenReturn(31);
+        when(ageCalculatorService.getAge(1L)).thenReturn(31);
         when(patientProxy.getPatientById(1L)).thenReturn(patientBean);
-        when(triggersCalculator.getTriggersCount("1")).thenReturn(10);
+        when(triggersCalculatorService.getTriggersCount("1")).thenReturn(10);
         //THEN
         Assessment result = diabetesAssessmentService.getAssessment("1");
         assertEquals(result.getAssessment(),Assessment.EARLY_ONSET.getAssessment());
