@@ -8,7 +8,7 @@ ENV MONGO_DATA_DIR /data/db
 COPY ../../../../init.js /docker-entrypoint-initdb.d/
 
 # Set the environment variables for the MongoDB configuration
-
+ENV MONGO_DATA_DIR /data/db
 
 # Expose the default MongoDB port (27017)
 EXPOSE 27017

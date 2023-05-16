@@ -2,12 +2,14 @@ package com.mediscreen.patient.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
+import jakarta.persistence.Table;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 
 import java.time.LocalDate;
 
 @Entity
+@Table(name = "patient")
 public class Patient {
     @Id
     private long id;

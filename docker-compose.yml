@@ -1,35 +1,40 @@
 version: '3.8'
 services:
-  mysql:
+  patient_db:
     image: mysql
     restart: always
     environment:
-      MYSQL_ROOT_USERNAME: root
+      MYSQL_USER: password
+      MYSQL_PASSWORD: password
       MYSQL_ROOT_PASSWORD: password
+      MYSQL_DATABASE: patientdb
     ports:
-      - "3306:3306"
+      - "3307:3306"
     volumes:
       - .script.sql:/docker-entrypoint-initdb.d/script.sql
 
-    container_name: mysql
-  mongodb:
+    container_name: patient_db
+  note:
     image: mongo
     restart: always
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: root
+      MONGO_INITDB_ROOT_PASSWORD: root
     ports:
-      - "27017:27017"
+      - "27018:27017"
     volumes:
         - ./init.js:/docker-entrypoint-initdb.d/init-mongo.js
-    container_name: mongodb
+    container_name: note
 
   mediscreen:
-    build: ./mediscreen
+    build: ./ui
     restart: always
     ports:
       - "8080:8080"
     environment:
-      - CONFIG_SERVER_URL=config-server:9101
-      - PATIENTAPI_URL=patientAPI:8081
-      - NOTEAPI_URL=noteAPI:8082
+      SPRING_CLOUD_CONFIG_URI: http://config-server:9101
+      patientUrl: http://patient_api:8081/patient
+      notUrl: http://note_api:8082/note
     depends_on:
       - config-server
       - note_api
@@ -49,16 +54,17 @@ services:
     ports:
       - "8081:8081"
     environment:
-      - MYSQL_HOST=mysql
-      - MYSQL_PORT=3306
-      - MYSQL_DATABASE=patientdb
-      - DB_USER=root
-      - DB_PW=password
-      - CONFIG_SERVER_URL=config-server:9101
+      SPRING_DATASOURCE_USERNAME: password
+      SPRING_DATASOURCE_PASSWORD: password
+      SPRING_DATASOURCE_URL: jdbc:mysql://patient_db:3306/patientdb?useSSL=false
+      SPRING_JPA_PROPERTIES_HIBERNATE_DIALECT: org.hibernate.dialect.MySQL5Dialect
+      SPRING_JPA_HIBERNATE_DDL_AUTO: update
+      SPRING_JPA_DEFER_DATASOURCE_INITIALIZATION: true
+      SPRING_CLOUD_CONFIG_URI: http://config-server:9101
     depends_on:
-      - mysql
+      - patient_db
       - config-server
-    container_name: patientAPI
+    container_name: patient_api
 
   note_api:
     build: ./note
@@ -66,14 +72,13 @@ services:
     ports:
       - "8082:8082"
     environment:
-      - MONGODB_HOST=mongodb
-      - MONGODB_PORT=27017
-      - MONGODB_USERNAME=root
-      - MONGODB_PASSWORD=password
-      - MONGODB_DATABASE=note
-      - CONFIG_SERVER_URL=config-server:9101
+      spring_data_mongodb_uri: mongodb://note:27017
+      spring_data_mongodb_database: note
+      spring_data_mongodb_username: root
+      spring_data_mongodb_password: root
+      SPRING_CLOUD_CONFIG_URI: http://config-server:9101
     depends_on:
-      - mongodb
+      - note
       - config-server
       - patient_api
-    container_name: noteAPI
+    container_name: note_api

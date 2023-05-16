@@ -1,7 +1,5 @@
 FROM openjdk:latest
 ADD target/patientAPI.jar patientAPI.jar
-ENV DB_USER=root
-ENV DB_PW=Letizia+1
-ENV DB_URL=jdbc:mysql://localhost:3306/patientdb
+ENV JAVA_OPTS=""
 ENTRYPOINT ["java","-jar","/patientAPI.jar"]
 EXPOSE 8081
