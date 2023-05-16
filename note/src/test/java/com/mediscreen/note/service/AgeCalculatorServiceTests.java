@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @RunWith(org.mockito.junit.MockitoJUnitRunner.class)
-public class AgeCalculatorServiceTest {
+public class AgeCalculatorServiceTests {
     @Mock
     private PatientProxy patientProxy;
     @InjectMocks

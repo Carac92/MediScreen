@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @RunWith(org.mockito.junit.MockitoJUnitRunner.class)
-public class DiabetesAssessmentServiceTest {
+public class DiabetesAssessmentServiceTests {
     @Mock
     private PatientProxy patientProxy;
     @Mock

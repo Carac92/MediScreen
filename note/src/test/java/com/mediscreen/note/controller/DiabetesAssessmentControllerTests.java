@@ -17,7 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(DiabetesAssessmentController.class)
-public class DiabetesAssessmentControllerTest {
+public class DiabetesAssessmentControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
@@ -25,7 +25,7 @@ public class DiabetesAssessmentControllerTest {
     private DiabetesAssessmentService diabetesAssessmentService;
 
     @Test
-    public void getAssessment_shouldReturnAssessment() throws Exception {
+    public void testGetAssessment_shouldReturnAssessment() throws Exception {
         given(diabetesAssessmentService.getAssessment("1")).willReturn(Assessment.IN_DANGER);
 
         mockMvc.perform(get("/assess/diabetes/1"))

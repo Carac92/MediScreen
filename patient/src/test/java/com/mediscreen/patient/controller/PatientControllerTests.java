@@ -1,7 +1,6 @@
-package com.mediscreen.patient.controllerTest;
+package com.mediscreen.patient.controller;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.mediscreen.patient.controller.PatientController;
 import com.mediscreen.patient.model.Patient;
 import com.mediscreen.patient.service.PatientService;
 import org.junit.Test;
@@ -27,7 +26,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(PatientController.class)
-public class PatientControllerTest {
+public class PatientControllerTests {
 
 
     @Autowired
@@ -37,7 +36,7 @@ public class PatientControllerTest {
     private PatientService patientService;
 
     @Test
-    public void listPatients_shouldReturnListOfPatients() throws Exception {
+    public void testListPatients_shouldReturnListOfPatients() throws Exception {
         List<Patient> patients = Arrays.asList(
                 new Patient(1L, "John", "Doe", LocalDate.of(1,1,1), "12345", 'M', "test"),
                 new Patient(2L, "Jane", "Doe", LocalDate.of(1,1,1), "12345", 'F', "test")
@@ -56,7 +55,7 @@ public class PatientControllerTest {
     }
 
     @Test
-    public void getPatientById_shouldReturnPatient() throws Exception {
+    public void testGetPatientById_shouldReturnPatient() throws Exception {
         Patient patient = new Patient(1L, "John", "Doe", LocalDate.of(1,1,1), "12345", 'M', "test");
         given(patientService.getPatientById(1L)).willReturn(patient);
 
@@ -68,7 +67,7 @@ public class PatientControllerTest {
     }
 
     @Test
-    public void getPatientByFirstNameAndLastName_shouldReturnPatient() throws Exception {
+    public void testGetPatientByFirstNameAndLastName_shouldReturnPatient() throws Exception {
         Patient patient = new Patient(1L, "John", "Doe", LocalDate.of(1,1,1), "12345", 'M', "test");
         when(patientService.getPatientByFirstNameAndLastName("John", "Doe")).thenReturn(patient);
 
@@ -80,20 +79,21 @@ public class PatientControllerTest {
     }
 
     @Test
-    public void addPatient_shouldAddNewPatient() throws Exception {
+    public void testAddPatient_shouldAddNewPatient() throws Exception {
+        ObjectMapper objectMapper = new ObjectMapper().registerModule(new com.fasterxml.jackson.datatype.jsr310.JavaTimeModule());
         Patient patient = new Patient(1L,"John", "Doe", LocalDate.of(1,1,1), "12345", 'M', "test");
 
         mockMvc.perform(post("/patient/add")
                         .accept(MediaType.APPLICATION_JSON)
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(new ObjectMapper().writeValueAsString(patient)))
+                        .content(objectMapper.writeValueAsString(patient)))
                 .andExpect(status().isOk());
 
         verify(patientService, times(1)).addPatient(any());
     }
 
     @Test
-    public void deletePatient_shouldDeletePatient() throws Exception {
+    public void testDeletePatient_shouldDeletePatient() throws Exception {
         Long id = 1L;
         doNothing().when(patientService).deletePatient(id);
 
@@ -104,13 +104,14 @@ public class PatientControllerTest {
     }
 
     @Test
-    public void updatePatient_shouldUpdatePatient() throws Exception {
+    public void testUpdatePatient_shouldUpdatePatient() throws Exception {
         Patient patient = new Patient(1L, "John", "Doe", LocalDate.of(1,1,1), "12345", 'M', "test");
         doNothing().when(patientService).updatePatient(patient);
+        ObjectMapper objectMapper = new ObjectMapper().registerModule(new com.fasterxml.jackson.datatype.jsr310.JavaTimeModule());
 
-        mockMvc.perform(put("/patient/update")
+        mockMvc.perform(put("/patient/update/1")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(new ObjectMapper().writeValueAsString(patient)))
+                        .content(objectMapper.writeValueAsString(patient)))
                 .andExpect(status().isOk());
 
         verify(patientService, times(1)).updatePatient(any());

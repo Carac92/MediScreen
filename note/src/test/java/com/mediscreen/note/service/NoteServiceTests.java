@@ -14,7 +14,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.*;
 
 @RunWith(org.mockito.junit.MockitoJUnitRunner.class)
-public class NoteServiceTest {
+public class NoteServiceTests {
     @Mock
     private NoteRepository noteRepository;
     @InjectMocks

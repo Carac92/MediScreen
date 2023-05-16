@@ -13,7 +13,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.mockito.Mockito.when;
 
 @RunWith(org.mockito.junit.MockitoJUnitRunner.class)
-public class TriggersCalculatorServiceTest {
+public class TriggersCalculatorServiceTests {
 
     @Mock
     private NoteRepository noteRepository;
@@ -21,7 +21,7 @@ public class TriggersCalculatorServiceTest {
     private TriggersCalculatorService triggersCalculatorService;
 
     @Test
-    public void getTriggersCount() {
+    public void testGetTriggersCount() {
         // GIVEN
         List<Note> notes = List.of(
                 new Note("1", "1", "Hémoglobine A1C, Fumeur, Anormal, Fumeur, Anormal")

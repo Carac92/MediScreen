@@ -1,8 +1,7 @@
-package com.mediscreen.patient.serviceTest;
+package com.mediscreen.patient.service;
 
 import com.mediscreen.patient.model.Patient;
 import com.mediscreen.patient.repository.PatientRepository;
-import com.mediscreen.patient.service.PatientService;
 import org.junit.Test;
 import org.junit.jupiter.api.Assertions;
 import org.junit.runner.RunWith;
@@ -16,7 +15,7 @@ import java.util.Optional;
 
 import static org.mockito.Mockito.*;
 @RunWith(org.mockito.junit.MockitoJUnitRunner.class)
-public class PatientServiceTest {
+public class PatientServiceTests {
 
     @Mock
     private PatientRepository patientRepository;

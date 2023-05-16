@@ -21,7 +21,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 
 @RunWith(SpringRunner.class)
 @WebMvcTest(NoteController.class)
-public class NoteControllerTest {
+public class NoteControllerTests {
 
     @Autowired
     private MockMvc mockMvc;
@@ -29,7 +29,7 @@ public class NoteControllerTest {
     private NoteService noteService;
 
     @Test
-    public void getNoteById_shouldReturnNote() throws Exception {
+    public void testGetNoteById_shouldReturnNote() throws Exception {
         Note note = new Note("1", "1", "test");
         given(noteService.findById("1")).willReturn(note);
 
@@ -40,7 +40,7 @@ public class NoteControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.annotation").value("test"));
     }
     @Test
-    public void getNoteByPatId_shouldReturnListOfNotes() throws Exception {
+    public void testGetNoteByPatId_shouldReturnListOfNotes() throws Exception {
         List<Note> notes = List.of(new Note ("1", "1", "test"));
         given(noteService.findAllNotesByPatId("1")).willReturn(notes);
 
@@ -51,7 +51,7 @@ public class NoteControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].annotation").value("test"));
     }
     @Test
-    public void getNoteByPatId_shouldReturnEmptyList() throws Exception {
+    public void testGetNoteByPatId_shouldReturnEmptyList() throws Exception {
         List<Note> notes = List.of();
         given(noteService.findAllNotesByPatId("1")).willReturn(notes);
 
@@ -60,7 +60,7 @@ public class NoteControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$").isEmpty());
     }
     @Test
-    public void getAllNotes_ShouldReturnListOfNotes() throws Exception {
+    public void testGetAllNotes_ShouldReturnListOfNotes() throws Exception {
         List<Note> notes = List.of(new Note ("1", "1", "test"));
         given(noteService.findAll()).willReturn(notes);
 
@@ -71,7 +71,7 @@ public class NoteControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$[0].annotation").value("test"));
     }
     @Test
-    public void addNote_shouldReturnStatusOk() throws Exception {
+    public void testAddNote_shouldReturnStatusOk() throws Exception {
         Note note = new Note ("1", "1", "test");
 
         mockMvc.perform(post("/note/add")
@@ -81,12 +81,12 @@ public class NoteControllerTest {
                 .andExpect(status().isOk());
     }
     @Test
-    public void deleteNoteById_shouldReturnStatusOk() throws Exception {
+    public void testDeleteNoteById_shouldReturnStatusOk() throws Exception {
         mockMvc.perform(delete("/note/delete/1"))
                 .andExpect(status().isOk());
     }
     @Test
-    public void updateNoteById_shouldReturnStatusOk() throws Exception {
+    public void testUpdateNoteById_shouldReturnStatusOk() throws Exception {
         Note note = new Note ("1", "1", "test");
 
         mockMvc.perform(put("/note/update")
@@ -96,7 +96,7 @@ public class NoteControllerTest {
                 .andExpect(status().isOk());
     }
     @Test
-    public void deleteAllNotes_shouldReturnStatusOk() throws Exception {
+    public void testDeleteAllNotes_shouldReturnStatusOk() throws Exception {
         mockMvc.perform(delete("/note/deleteAll"))
                 .andExpect(status().isOk());
     }
