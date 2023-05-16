@@ -5,7 +5,10 @@ import com.mediscreen.note.proxy.PatientProxy;
 import org.springframework.stereotype.Service;
 
 import java.time.Period;
-
+/**
+ * This is the service for the age calculator.
+ * It is used to calculate the age of a patient.
+ */
 @Service
 public class AgeCalculatorService {
 

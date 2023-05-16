@@ -3,7 +3,9 @@ package com.mediscreen.ui.beans;
 import org.springframework.format.annotation.DateTimeFormat;
 
 import java.time.LocalDate;
-
+/**
+ * This is the bean for the patient.
+ */
 public class PatientBean {
 
     private long id;

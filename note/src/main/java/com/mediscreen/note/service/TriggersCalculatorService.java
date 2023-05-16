@@ -7,7 +7,12 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
-
+/**
+ * This is the service for the triggers.
+ * It is used to calculate the number of triggers in the notes.
+ * the algorithm avoid to count twice the same trigger in the same note or in another note.
+ * It communicates with the repository.
+ */
 @Service
 public class TriggersCalculatorService {
     private final NoteRepository noteRepository;

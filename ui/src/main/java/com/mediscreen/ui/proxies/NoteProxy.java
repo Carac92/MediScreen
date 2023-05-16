@@ -5,7 +5,9 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+/**
+ * This is the proxy for the note api.
+ */
 @FeignClient(name = "note", url = "${noteUrl}")
 public interface NoteProxy {
     @GetMapping(value = "/list")

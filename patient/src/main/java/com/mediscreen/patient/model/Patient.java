@@ -7,7 +7,10 @@ import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Past;
 
 import java.time.LocalDate;
-
+/**
+ * This is the model for the patient.
+ * It is used to store the patient information.
+ */
 @Entity
 @Table(name = "patient")
 public class Patient {

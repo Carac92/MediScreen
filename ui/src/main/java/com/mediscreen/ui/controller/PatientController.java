@@ -9,7 +9,9 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+/**
+ * This is the controller for the patient.
+ */
 @Controller
 @RequestMapping("/patient")
 public class PatientController {

@@ -1,7 +1,10 @@
 package com.mediscreen.note.bean;
 
 import java.time.LocalDate;
-
+/**
+ * This is the bean for the patient.
+ * It is used to store the data of the patient.
+ */
 public class PatientBean {
     private Long id;
     private String firstName;

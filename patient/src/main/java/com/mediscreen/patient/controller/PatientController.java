@@ -7,7 +7,10 @@ import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+/**
+ * This is the controller for the patient api.
+ * It is used to manage the patient data.
+ */
 @RestController
 @RequestMapping("/patient")
 public class PatientController {

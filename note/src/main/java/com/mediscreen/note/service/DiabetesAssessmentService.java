@@ -3,7 +3,12 @@ package com.mediscreen.note.service;
 import com.mediscreen.note.constant.Assessment;
 import com.mediscreen.note.proxy.PatientProxy;
 import org.springframework.stereotype.Service;
-
+/**
+ * This is the service for the diabetes assessment.
+ * It is used to calculate the diabetes assessment of a patient.
+ * It uses the triggers calculator service and the age calculator service.
+ * It uses the patient proxy to communicate with the patient microservice.
+ */
 @Service
 public class DiabetesAssessmentService {
     private final TriggersCalculatorService triggersCalculatorService;

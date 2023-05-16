@@ -5,7 +5,9 @@ import org.springframework.cloud.openfeign.FeignClient;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
-
+/**
+ * This is the proxy for the patient api.
+ */
 @FeignClient(name = "patient", url = "${patientUrl}")
 public interface PatientProxy {
     @GetMapping(value = "/list")

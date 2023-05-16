@@ -1,5 +1,8 @@
 package com.mediscreen.note.constant;
-
+/**
+ * This is the class for the assessment.
+ * It is used to store the assessment.
+ */
 public enum Assessment {
     NONE("None"),
     BORDERLINE("Borderline"),
