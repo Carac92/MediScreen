@@ -1,33 +1,26 @@
-package com.mediscreen.ui.beans;
-
-import org.springframework.format.annotation.DateTimeFormat;
+package com.mediscreen.note.bean;
 
 import java.time.LocalDate;
 /**
  * This is the bean for the patient.
+ * It is used to store the data of the patient.
  */
 public class PatientBean {
-
-    private long id;
-
+    private Long id;
     private String firstName;
-
     private String lastName;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
     private LocalDate dob;
-
-    private String phoneNumber;
-
     private char gender;
-    private String address;
 
-    public void setId(long id) {
-        this.id = id;
+    public PatientBean() {
     }
 
-    public long getId() {
+    public Long getId() {
         return id;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
@@ -52,22 +45,6 @@ public class PatientBean {
 
     public void setDob(LocalDate dob) {
         this.dob = dob;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public void setAddress(String address) {
-        this.address = address;
-    }
-
-    public String getPhoneNumber() {
-        return phoneNumber;
-    }
-
-    public void setPhoneNumber(String phoneNumber) {
-        this.phoneNumber = phoneNumber;
     }
 
     public char getGender() {

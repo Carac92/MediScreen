@@ -5,7 +5,9 @@ import com.mediscreen.ui.proxies.NoteProxy;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-
+/**
+ * This is the controller for the note.
+ */
 @Controller
 @RequestMapping("/note")
 public class NoteController {

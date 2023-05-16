@@ -15,8 +15,8 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.RequestBuilder;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import java.time.LocalDate;
 import java.util.Arrays;
-import java.util.Date;
 import java.util.List;
 
 import static org.hamcrest.Matchers.hasSize;
@@ -39,8 +39,8 @@ public class PatientControllerTest {
     @Test
     public void listPatients_shouldReturnListOfPatients() throws Exception {
         List<Patient> patients = Arrays.asList(
-                new Patient(1L, "John", "Doe", new Date(), "12345", 'M', "test"),
-                new Patient(2L, "Jane", "Doe", new Date(), "12345", 'F', "test")
+                new Patient(1L, "John", "Doe", LocalDate.of(1,1,1), "12345", 'M', "test"),
+                new Patient(2L, "Jane", "Doe", LocalDate.of(1,1,1), "12345", 'F', "test")
         );
         given(patientService.getAllPatients()).willReturn(patients);
 
@@ -57,7 +57,7 @@ public class PatientControllerTest {
 
     @Test
     public void getPatientById_shouldReturnPatient() throws Exception {
-        Patient patient = new Patient(1L, "John", "Doe", new Date(), "12345", 'M', "test");
+        Patient patient = new Patient(1L, "John", "Doe", LocalDate.of(1,1,1), "12345", 'M', "test");
         given(patientService.getPatientById(1L)).willReturn(patient);
 
         mockMvc.perform(get("/patient/1"))
@@ -69,7 +69,7 @@ public class PatientControllerTest {
 
     @Test
     public void getPatientByFirstNameAndLastName_shouldReturnPatient() throws Exception {
-        Patient patient = new Patient(1L, "John", "Doe", new Date(), "12345", 'M', "test");
+        Patient patient = new Patient(1L, "John", "Doe", LocalDate.of(1,1,1), "12345", 'M', "test");
         when(patientService.getPatientByFirstNameAndLastName("John", "Doe")).thenReturn(patient);
 
         mockMvc.perform(get("/patient/John/Doe"))
@@ -81,7 +81,7 @@ public class PatientControllerTest {
 
     @Test
     public void addPatient_shouldAddNewPatient() throws Exception {
-        Patient patient = new Patient(1L,"John", "Doe", new Date(1990-01-01), "12345", 'M', "test");
+        Patient patient = new Patient(1L,"John", "Doe", LocalDate.of(1,1,1), "12345", 'M', "test");
 
         mockMvc.perform(post("/patient/add")
                         .accept(MediaType.APPLICATION_JSON)
@@ -105,7 +105,7 @@ public class PatientControllerTest {
 
     @Test
     public void updatePatient_shouldUpdatePatient() throws Exception {
-        Patient patient = new Patient(1L, "John", "Doe", new Date(1990-01-01), "12345", 'M', "test");
+        Patient patient = new Patient(1L, "John", "Doe", LocalDate.of(1,1,1), "12345", 'M', "test");
         doNothing().when(patientService).updatePatient(patient);
 
         mockMvc.perform(put("/patient/update")

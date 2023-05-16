@@ -7,7 +7,10 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
-
+/**
+ * This is the service for the note.
+ * It is used to communicate with the repository.
+ */
 @Service
 public class NoteService {
     private final NoteRepository noteRepository;
