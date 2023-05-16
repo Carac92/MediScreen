@@ -1,7 +1,9 @@
 package com.mediscreen.ui.beans;
 
 import java.time.LocalDateTime;
-
+/**
+ * This is the bean for the note.
+ */
 public class NoteBean {
     private String id;
     private LocalDateTime date;

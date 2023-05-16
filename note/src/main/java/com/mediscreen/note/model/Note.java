@@ -4,7 +4,10 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import java.time.LocalDateTime;
-
+/**
+ * This is the model for the note.
+ * It is used to store the data of the MongoDB database.
+ */
 @Document(collection = "notes")
 public class Note {
 

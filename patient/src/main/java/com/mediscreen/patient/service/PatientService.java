@@ -6,6 +6,11 @@ import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+/**
+ * This is the service for the patient.
+ * It is used to communicate with the controller.
+ * It communicates with the repository.
+ */
 @Service
 @Slf4j
 public class PatientService {
