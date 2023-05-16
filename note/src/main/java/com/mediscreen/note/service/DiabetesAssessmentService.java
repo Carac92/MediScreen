@@ -2,6 +2,7 @@ package com.mediscreen.note.service;
 
 import com.mediscreen.note.constant.Assessment;
 import com.mediscreen.note.proxy.PatientProxy;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 /**
  * This is the service for the diabetes assessment.
@@ -9,6 +10,7 @@ import org.springframework.stereotype.Service;
  * It uses the triggers calculator service and the age calculator service.
  * It uses the patient proxy to communicate with the patient microservice.
  */
+@Slf4j
 @Service
 public class DiabetesAssessmentService {
     private final TriggersCalculatorService triggersCalculatorService;
@@ -24,6 +26,7 @@ public class DiabetesAssessmentService {
     }
 
     public Assessment getAssessment(String patId) {
+        log.info("Calculating diabetes assessment of patient with id: {}", patId);
         int triggersCount = triggersCalculatorService.getTriggersCount(patId);
         int age = ageCalculatorService.getAge(Long.parseLong(patId));
         char gender = patientProxy.getPatientById(Long.parseLong(patId)).getGender();

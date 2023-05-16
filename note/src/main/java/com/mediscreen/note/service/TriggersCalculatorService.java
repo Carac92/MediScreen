@@ -3,6 +3,7 @@ package com.mediscreen.note.service;
 import com.mediscreen.note.constant.Triggers;
 import com.mediscreen.note.model.Note;
 import com.mediscreen.note.repository.NoteRepository;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -13,6 +14,7 @@ import java.util.List;
  * the algorithm avoid to count twice the same trigger in the same note or in another note.
  * It communicates with the repository.
  */
+@Slf4j
 @Service
 public class TriggersCalculatorService {
     private final NoteRepository noteRepository;
@@ -21,6 +23,7 @@ public class TriggersCalculatorService {
         this.noteRepository = noteRepository;
     }
     public int getTriggersCount(String patId) {
+        log.info("Calculating triggers count for patient with id: {}", patId);
         List<String> triggers = new ArrayList<>(Triggers.getTrigger());
         List<Note> notes = noteRepository.findByPatId(patId);
         int count = 0;
