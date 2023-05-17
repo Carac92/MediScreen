@@ -4,11 +4,11 @@ and an assessment of their diabetes situation based on their gender, age and not
 
 # Technical
 
-Java Version : 17
-Spring boot version : 3.0.5
-Docker version : 3.8
-MongoDB version : 6.0.5
-MySQL
+- Java Version : 17
+- Spring boot version : 3.0.5
+- Docker Engine: 20.10.22
+- MongoDB version : 6.0.5
+- MySQL
 
 # Setup project
 
