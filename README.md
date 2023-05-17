@@ -22,8 +22,10 @@ With spring
 
 1. GitClone the project
 2. open it with intellij
-3. launch config-server
-4. launch all the services (patient,note, ui)
+3. create SQL data base (copy paste init.sql)
+4. create NoSQL database (copy paste init.js in mongosh)
+5. launch config-server
+6. launch all the services (patient,note, ui)
 
 
 # UML diagram
