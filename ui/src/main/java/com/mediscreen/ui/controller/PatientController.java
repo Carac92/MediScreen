@@ -51,7 +51,7 @@ public class PatientController {
     @PostMapping("/updatePatient")
     public String updatePatient(PatientBean patient) {
         patientProxy.updatePatient(patient.getId(),patient);
-        return "redirect:/list";
+        return "redirect:/patient/list";
     }
     @PostMapping("/validAddPatient")
     public String addPatient(PatientBean patient) {

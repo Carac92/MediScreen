@@ -10,7 +10,8 @@
 <body>
 <div class = "container">
     <h1>Profile</h1>
-    <form th:method="put" th:action="@{/updatePatient}" th:object="${patient}">
+    <form th:method="put" th:action="@{/patient/updatePatient}" th:object="${patient}">
+        <input type="hidden" th:field="*{id}" th:placeholder="${patient.getId()}">
         <div class="mb-3">
             <input class="form-label" th:field="*{firstName}" type="text" name="first name" th:placeholder="${patient.getFirstName()}" required="">
         </div>
@@ -21,7 +22,11 @@
             <input class="form-label" th:field="*{phoneNumber}" type="text" name="phone number" th:placeholder="${patient.getPhoneNumber()}" required="">
         </div>
         <div class="mb-3">
-            <input class="form-label" th:field="*{gender}" type="text" name="gender" th:placeholder="${gender}" required="">
+            <label>Gender</label>
+            <select class="form-select" aria-label="Default select example" th:field="*{gender}" name="gender">
+                <option value="M">M</option>
+                <option value="F">F</option>
+            </select>
         </div>
         <div class="mb-3">
             <input class="form-label" th:field="*{address}" type="text" name="address" th:placeholder="${patient.getAddress()}" required="">
