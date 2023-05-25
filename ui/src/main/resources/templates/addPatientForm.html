@@ -24,7 +24,11 @@
             <input class="form-label" th:field="*{phoneNumber}" type="text" name="phoneNumber" placeholder="Phone Number" required="">
         </div>
         <div class="mb-3">
-            <input class="form-label" th:field="*{gender}" type="text" name="gender" placeholder="Gender" required="">
+            <label>Gender</label>
+            <select class="form-select" aria-label="Default select example" th:field="*{gender}" name="gender">
+                <option value="M">M</option>
+                <option value="F">F</option>
+            </select>
         </div>
         <div class="mb-3">
             <label>Birthdate</label>
