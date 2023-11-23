@@ -5,7 +5,7 @@ FROM mongo:latest
 WORKDIR /data
 ENV MONGO_DATA_DIR /data/db
 # Copy the MongoDB configuration file into the container
-COPY ../../../../init.js /docker-entrypoint-initdb.d/
+COPY ../../../../mongo-init.js /docker-entrypoint-initdb.d/
 
 # Set the environment variables for the MongoDB configuration
 ENV MONGO_DATA_DIR /data/db

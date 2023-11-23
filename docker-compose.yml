@@ -15,19 +15,23 @@ services:
       - db_data:/var/lib/mysql
 
     container_name: patient-db
+
+
   mongo:
     image: mongo
     restart: always
     environment:
-      MONGO_INITDB_ROOT_USERNAME: root
-      MONGO_INITDB_ROOT_PASSWORD: root
-      MONGO_INITDB_DATABASE: note
+      MONGODB_INIT_ROOT_USERNAME: admin
+      MONGODB_INIT_ROOT_PASSWORD: admin
+      MONGODB_INIT_DATABASE: notes
     ports:
       - "27018:27017"
+    command: mongod --bind_ip_all  # Permet les connexions distantes
     volumes:
-        - ./init.js:/docker-entrypoint-initdb.d/init-mongo.js
+        - ./mongo-init.js:/docker-entrypoint-initdb.d/init-mongo.js
         - mongo_data:/data/db
     container_name: mongo
+
 
   mediscreen:
     build: ./ui
@@ -45,6 +49,7 @@ services:
       - patient-api
     container_name: mediscreen
 
+
   config-server:
     build: ./config-server
     restart: always
@@ -52,8 +57,10 @@ services:
       - "9101:9101"
     container_name: config-server
 
+
   patient-api:
     build: ./patient
+    hostname: localhost
     restart: always
     ports:
       - "8081:8081"
@@ -69,17 +76,19 @@ services:
       - config-server
     container_name: patient-api
 
+
   note-api:
     build: ./note
+    hostname: localhost
     restart: always
     ports:
       - "8082:8082"
     environment:
-      MONGO_USER: root
-      MONGO_PW: root
+      MONGO_USER: admin
+      MONGO_PW: admin
       MONGO_HOST: mongo
-      MONGO_PORT: 27018
-      MONGO_AUTH2: ?authSource=admin
+      MONGO_PORT: 27017
+      MONGO_AUTH2: admin
       SPRING_CLOUD_CONFIG_URI: http://config-server:9101
     depends_on:
       - mongo
@@ -87,8 +96,7 @@ services:
       - patient-api
     container_name: note-api
 
+
 volumes:
     db_data:
     mongo_data:
-
-
