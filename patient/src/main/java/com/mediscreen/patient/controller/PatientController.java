@@ -6,6 +6,7 @@ import io.swagger.v3.oas.annotations.Operation;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 /**
  * This is the controller for the patient api.
@@ -51,5 +52,10 @@ public class PatientController {
     @PutMapping("/update/{id}")
     public void updatePatient(@PathVariable(value = "id") Long id,@RequestBody @Valid Patient patient) {
         patientService.updatePatient(patient);
+    }
+    @Operation(summary = "get Patients by gender and Dob")
+    @GetMapping("/{gender}/{dob}")
+    public String  getPatientByGenderAndDob(@PathVariable(value = "gender") char gender, @PathVariable(value = "dob")LocalDate dob){
+        return patientService.getPatientsByBirthdateAndGender(gender, dob).toString();
     }
 }

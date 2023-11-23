@@ -5,6 +5,7 @@ import com.mediscreen.patient.repository.PatientRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
 import java.util.List;
 /**
  * This is the service for the patient.
@@ -43,5 +44,8 @@ public class PatientService {
     public void updatePatient(Patient patient) {
         log.info("PatientService.updatePatient: patient={}", patient.toString());
         patientRepository.save(patient);
+    }
+    public List<Patient> getPatientsByBirthdateAndGender(char gender, LocalDate dob){
+        return patientRepository.findPatientsByGenderAndDob(gender, dob);
     }
 }

@@ -36,7 +36,6 @@ public class PatientController {
         PatientBean patient = patientProxy.getPatientById(id);
         model.addAttribute("patient", patient);
         model.addAttribute("notes", noteProxy.getNotesByPatId(id.toString()));
-        //TODO: Regarder pourquoi le charactère n'est pas affiché correctement
         String htmlGender = "&#x" + Integer.toHexString(String.valueOf(patient.getGender()).codePointAt(0)).toUpperCase() + ";";
         model.addAttribute("gender", htmlGender);
         return "patient";
