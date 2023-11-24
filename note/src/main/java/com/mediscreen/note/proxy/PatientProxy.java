@@ -8,7 +8,7 @@ import java.util.List;
  * This is the proxy for the patient service.
  */
 
-@FeignClient(name = "patient-service", url = "http://localhost:8081/patient")
+@FeignClient(name = "patient-service", url = "${patientUrl}")
 public interface PatientProxy {
     @GetMapping(value = "/list")
     List<PatientBean> getPatients();

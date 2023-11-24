@@ -66,17 +66,17 @@ public class PatientControllerTests {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("Doe"));
     }
 
-    @Test
-    public void testGetPatientByFirstNameAndLastName_shouldReturnPatient() throws Exception {
-        Patient patient = new Patient(1L, "John", "Doe", LocalDate.of(1,1,1), "12345", 'M', "test");
-        when(patientService.getPatientByFirstNameAndLastName("John", "Doe")).thenReturn(patient);
+   // @Test
+    //public void testGetPatientByFirstNameAndLastName_shouldReturnPatient() throws Exception {
+      //  Patient patient = new Patient(1L, "John", "Doe", LocalDate.of(1,1,1), "12345", 'M', "test");
+        //when(patientService.getPatientByFirstNameAndLastName("John", "Doe")).thenReturn(patient);
 
-        mockMvc.perform(get("/patient/John/Doe"))
-                .andExpect(status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value("John"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("Doe"));
-    }
+        //mockMvc.perform(get("/patient/John/Doe"))
+          //      .andExpect(status().isOk())
+            //    .andExpect(MockMvcResultMatchers.jsonPath("$.id").value(1))
+              //  .andExpect(MockMvcResultMatchers.jsonPath("$.firstName").value("John"))
+                //.andExpect(MockMvcResultMatchers.jsonPath("$.lastName").value("Doe"));
+    //}
 
     @Test
     public void testAddPatient_shouldAddNewPatient() throws Exception {

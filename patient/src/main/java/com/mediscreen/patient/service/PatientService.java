@@ -7,6 +7,8 @@ import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Optional;
+
 /**
  * This is the service for the patient.
  * It is used to communicate with the controller.
@@ -22,7 +24,15 @@ public class PatientService {
 
 
     public Patient getPatientById(Long id) {
-        return patientRepository.findById(id).orElse(null);
+        Optional<Patient> patient = patientRepository.findById(id);
+        if(patient.isPresent()) {
+            log.info("PatientService.getPatientById: id={}, patient={}", id, patient.get());
+            return patient.get();
+        }
+        else {
+            log.info("PatientService.getPatientById: id={}, patient=null", id);
+            return null;
+        }
     }
     public Patient getPatientByFirstNameAndLastName(String firstName, String lastName) {
         log.info("PatientService.getPatientByFirstNameAndLastName: firstName={}, lastName={}",
